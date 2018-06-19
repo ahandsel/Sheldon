@@ -18,43 +18,28 @@ jQuery.noConflict();
             kintoneDayOfWeekField: 'Day of Week',
             pluginSubmit: '     Save   ',
             pluginCancel: '     Cancel   ',
-            textCalendar: 'Day of Week (plug-in)',
+            textDayOfWeek: 'Day of Week (plug-in)',
             textKintoneFields: 'Please create the following fields in your app form.',
-            textApiError: 'Error occurred.',
+            textApiError: 'Error occurred.'
+        },
+        ja: {
+            configTitle: '設定',
+            pluginActivation: 'プラグインアクティベーション',
+            pluginActive: '有効化',
+            kintoneFieldConfig: 'kintoneフィールド設定',
+            kintoneDateField: '日付',
+            kintoneDayOfWeekField: '曜日',
+            pluginSubmit: '     保存   ',
+            pluginCancel: 'キャンセル',
+            textDayOfWeek: '曜日 (プラグイン)',
+            textKintoneFields: '次のフィールドを設定してください。',
+            textApiError: 'エラー発生'
         }
-        // ja: {
-        //     configTitle: '設定',
-        //     pluginActivation: 'プラグインアクティベーション',
-        //     pluginActive: '有効化',
-        //     kintoneViewConfig: 'kintoneビュー設定',
-        //     kintoneViews: 'カレンダー表示対象ビュー',
-        //     kintoneFieldConfig: 'kintoneフィールド設定',
-        //     kintoneTitleField: 'スケジュールタイトルフィールド',
-        //     kintoneDate: 'スケジュール開始日時フィールド',
-        //     kintoneEndDatetimeField: 'スケジュール終了日時フィールド',
-        //     kintoneAlldayField: '終日チェックフィールド',
-        //     kintoneScheduleColorField: 'スケジュール背景色フィールド',
-        //     pluginSubmit: '     保存   ',
-        //     pluginCancel: 'キャンセル',
-        //     textCalendar: 'カレンダー (プラグイン)',
-        //     textViews: '<div id="calendar"/> が設定されている全てのカスタマイズビューでカレンダー表示されます。',
-        //     textKintoneFields: '次のフィールドを設定してください。',
-        //     textNoViews: '(設定済みのカスタマイズビューが存在しません。<a id="create-customView">新しく作成する</a>。)',
-        //     textAllday: '選択肢が1つのチェックボックスフィールドが選択可能です。（例：「終日」）',
-        //     textCreateViewTitle: 'カスタマイズビュー作成',
-        //     textCreateViewText: 'カレンダー表示用のカスタマイズビューを作成します。',
-        //     textUpdateViewSuccess: 'カスタマイズビュー作成',
-        //     textUpdateViewError: '一覧の取得もしくは更新に失敗しました。',
-        //     textApiError: 'エラー発生',
-        //     buttonCreateViewConfirm: '作成',
-        //     buttonCreateViewCancel: 'キャンセル'
-        // }
     };
     var i18n = LANG in terms ? terms[LANG] : terms.en;
 
     // append events
     var appendEvents = function appendEvents() {
-
         // save plug-in settings
         $('#submit').click(function() {
             var config = {};
@@ -98,7 +83,7 @@ jQuery.noConflict();
                 id: 'dayOfWeek-field',
                 fields: fields['dayOfWeek-field']
             }],
-            // section4 buttons
+            // section3 buttons
             pluginSubmit: i18n.pluginSubmit,
             pluginCancel: i18n.pluginCancel
         };
