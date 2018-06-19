@@ -1,19 +1,21 @@
 (function () {
     "use strict";
 
-    var SAVE_EVENTS = ['app.record.create.submit', 'app.record.edit.submit','app.record.index.edit.submit'];
+    var CHANGE_EVENTS = ['app.record.create.change.Text', 'app.record.edit.change.Text','app.record.index.edit.change.Text'];
     var EDIT_EVENTS = ['app.record.edit.show', 'app.record.create.show', 'app.record.index.edit.show'];
-    
-    //The "day of the week" field should be updated whenever a record's date is changed.
-    kintone.events.on(SAVE_EVENTS, function(event) {
-        var date = event.record['Date'].value;
-        event.record['Day_Of_Week'].value = moment(date).format('dddd');
+
+    //The character count field should be updated as the user types into a field.
+    //At the moment, it only updates when the user presses the ENTER key.
+    kintone.events.on(CHANGE_EVENTS, function(event) {
+        var text = event.changes.field.value;
+        text = text.replace(/\s+/g, "");
+        event.record['Char_Count'].value = text.length;
         return event;
     });
-    
-    //Users should not be able to directly edit the calculated "day of the week" field.
+
+    //Users should not be able to directly edit the character count field.
     kintone.events.on(EDIT_EVENTS, function (event) {
-        event.record['Day_Of_Week'].disabled = true;
+        event.record['Char_Count'].disabled = true;
         return event;
     });
 })();

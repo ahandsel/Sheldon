@@ -1,0 +1,42 @@
+{
+    "manifest_version": 1,
+    "version": 1,
+    "type": "APP",
+    "name": {
+        "ja": "文字数プラグイン",
+        "en": "Character Count Plug-in",
+        "zh": "Character Count Plug-in"
+    },
+    "description": {
+        "ja": "文字列の文字数を表示するプラグインです。",
+        "en": "Displays the character count for a text field.",
+        "zh": "Displays the character count for a text field."
+    },
+    "icon": "image/icon.png",
+    "desktop": {
+        "js": [
+            "https://js.kintone.com/jquery/3.3.1/jquery.min.js",
+            "https://js.kintone.com/jsrender/0.9.90/jsrender.min.js",
+            "js/customize.js"
+        ],
+        "css": [
+            "css/51-current-default.css"
+        ]
+    },
+    "config": {
+        "html": "html/config.html",
+        "js": [
+            "https://js.kintone.com/jquery/2.2.4/jquery.min.js",
+            "https://js.kintone.com/jsrender/0.9.90/jsrender.min.js",
+            "js/config.js"
+        ],
+        "css": [
+            "css/51-current-default.css",
+            "css/config.css"
+        ],
+        "required_params": [
+            "textField",
+            "charCountField"
+        ]
+    }
+}
