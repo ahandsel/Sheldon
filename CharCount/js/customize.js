@@ -20,8 +20,9 @@ jQuery.noConflict();
     //At the moment, it only updates when the user presses the ENTER key.
     kintone.events.on(CHANGE_EVENTS, function(event) {
         var text = event.changes.field.value;
-        text = text.replace(/\s+/g, "");
-        event.record[CHAR_COUNT_FIELD].value = text.length;
+        var nonSymPattern = /\w/g;
+        var result = text.match(nonSymPattern);
+        event.record[CHAR_COUNT_FIELD].value = result.length;
         return event;
     });
 
