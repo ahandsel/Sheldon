@@ -1,8 +1,23 @@
 (function () {
     "use strict";
 
-    var CHANGE_EVENTS = ['app.record.create.change.Table', 'app.record.edit.change.Table','app.record.index.edit.change.Table'];
-    var SHOW_EVENTS = ['app.record.create.show', 'app.record.edit.show', 'app.record.index.edit.show'];
+    var SHOW_EVENTS = ['app.record.create.show',
+                       'app.record.edit.show',
+                       'app.record.index.edit.show'];
+
+    var CHANGE_EVENTS = ['app.record.create.change.Table',
+                         'app.record.edit.change.Table',
+                         'app.record.index.edit.change.Table'];
+
+    //Disables the Row Num fields in the table when the record is initially displayed.
+    kintone.events.on(SHOW_EVENTS, function(event) {
+       event.record['Table'].value[0].value['Row'].value = 1;
+       var count = event.record['Table'].value.length;
+       for (var i = 0; i < count; i++) {
+           event.record['Table'].value[i].value['Row'].disabled = true;
+       }
+       return event;
+    });
 
     //The row numbers need to be updated each time a row is added/removed.
     kintone.events.on(CHANGE_EVENTS, function(event) {
@@ -14,16 +29,6 @@
         var count = event.record['Table'].value.length;
         for (var i = 0; i < count; i++) {
             event.record['Table'].value[i].value['Row'].value = i + 1;
-        }
-        return event;
-    });
-
-    //Disables the Row Num fields in the table when the record is initially displayed.
-    kintone.events.on(SHOW_EVENTS, function(event) {
-        event.record['Table'].value[0].value['Row'].value = 1;
-        var count = event.record['Table'].value.length;
-        for (var i = 0; i < count; i++) {
-            event.record['Table'].value[i].value['Row'].disabled = true;
         }
         return event;
     });
