@@ -1,0 +1,21 @@
+{
+    "manifest_version": 1,
+    "version": 1,
+    "type": "APP",
+    "name": {
+        "ja": "時刻クリアプラグイン",
+        "en": "Clear Time Plug-in",
+        "zh": "Clear Time Plug-in"
+    },
+    "description": {
+        "ja": "削除キーで時刻を消すことができるプラグインです。",
+        "en": "Clear a time field by typing in the Delete key.",
+        "zh": "Clear a time field by typing in the Delete key."
+    },
+    "icon": "image/icon.png",
+    "desktop": {
+        "js": [
+            "js/customize.js"
+        ]
+    }
+}
