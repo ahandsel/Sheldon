@@ -42,6 +42,7 @@ jQuery.noConflict();
     var appendEvents = function appendEvents() {
         // save plug-in settings
         $('#submit').click(function() {
+            // config vals are JSON strings
             var config = {};
             config.activation = $('#activation').prop('checked') ? 'active' : 'deactive';
             config.textField = $('#text-field').val();
@@ -107,6 +108,7 @@ jQuery.noConflict();
                     code: field.code,
                     type: field.type
                 };
+                item.json = JSON.stringify(item);
                 switch (field.type) {
                     case 'MULTI_LINE_TEXT':
                         fields['text-field'].push(item);
@@ -140,7 +142,6 @@ jQuery.noConflict();
                 $('#text-field').val(config.textField);
                 $('#charCount-field').val(config.charCountField);
             }
-            // append events
             appendEvents();
         });
     };

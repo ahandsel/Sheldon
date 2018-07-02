@@ -7,54 +7,57 @@ jQuery.noConflict();
         return;
     }
 
-    var TEXT_FIELD = config.textField;
-    var CHAR_COUNT_FIELD = config.charCountField;
+    var TEXT = JSON.parse(config.textField);
+    var CHAR_COUNT = JSON.parse(config.charCountField);
 
-    var SHOW_EVENTS = ['app.record.create.show',
+    var RECORD_DETAILS = ['app.record.create.show',
                        'app.record.edit.show'];
 
-    var NUM_PATTERN = /\d/g;
+    var NOT_NUMBERS = /\D+/g;
     var ALPHA_NUM_PATTERN = /\w/g;
 
-    kintone.events.on(SHOW_EVENTS, function (e) {
-      var charCountField = e.record[CHAR_COUNT_FIELD];
+    var findElement = function(label, show_type, source) {
+      var element = $("span:contains("+ label +")");
+      if (show_type == "index") {
+        element = element.parent().parent().parent();
+      } else {
+        element = element.parent();
+      }
+      var element_id = element.attr('class').replace(NOT_NUMBERS, '');
 
-      var id = $("span:contains('Text Area 2')").parent().attr('class');
-      id = id.replace( /\D+/g, '');
+      if (show_type == "index") {
+        return $("td[class*=" + element_id + "]").find(":input")[0];
+      } else if (source) {
+        return $("textarea[name*=" + element_id + "]")[0];
+      } else {
+        return $("input[id*=" + element_id + "]")[0];
+      }
+    };
 
-      $("textarea[name*=" + id + "]")[0].onkeydown = function() {
+    var addKeyUpListener = function(textLabel, charCountLabel, show_type) {
+      var text_el = findElement(textLabel, show_type, true);
+      text_el.onkeyup = function() {
         var text = this.value.match(ALPHA_NUM_PATTERN);
         var charCount = 0;
         if (text) {
           charCount = text.length;
         }
-        var target = $("span:contains('Number 2')").parent().attr('class');
-        target = target.replace( /\D+/g, '');
-        $("input[id*=" + target + "]")[0].value = charCount;
+        var charCount_el = findElement(charCountLabel, show_type);
+        charCount_el.value = charCount;
       };
+    };
 
+    kintone.events.on(RECORD_DETAILS, function (e) {
+      var charCountField = e.record[CHAR_COUNT.code];
       charCountField.disabled = true;
+      addKeyUpListener(TEXT.label, CHAR_COUNT.label, "details");
       return e;
     });
 
     kintone.events.on('app.record.index.edit.show', function (e) {
-      var charCountField = e.record[CHAR_COUNT_FIELD];
-
-      var id = $("span:contains('Text Area 2')").parent().parent().parent().attr('class');
-      id = id.replace( /\D+/g, '');
-
-      $("td[class*=" + id + "]").find(":input")[0].onkeydown = function() {
-        var text = this.value.match(ALPHA_NUM_PATTERN);
-        var charCount = 0;
-        if (text) {
-          charCount = text.length;
-        }
-        var target = $("span:contains('Number 2')").parent().parent().parent().attr('class');
-        target = target.replace( /\D+/g, '');
-        $("td[class*=" + target + "]").find(":input")[0].value = charCount;
-      };
-
+      var charCountField = e.record[CHAR_COUNT.code];
       charCountField.disabled = true;
+      addKeyUpListener(TEXT.label, CHAR_COUNT.label, "index");
       return e;
     });
 })(jQuery, kintone.$PLUGIN_ID);

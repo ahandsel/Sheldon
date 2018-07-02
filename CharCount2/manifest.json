@@ -1,11 +1,11 @@
 {
     "manifest_version": 1,
-    "version": 1,
+    "version": 2,
     "type": "APP",
     "name": {
-        "ja": "文字数プラグイン2",
-        "en": "Character Count 2 Plug-in",
-        "zh": "Character Count 2 Plug-in"
+        "ja": "文字数プラグイン",
+        "en": "Character Count Plug-in",
+        "zh": "Character Count Plug-in"
     },
     "description": {
         "ja": "文字列の文字数を表示するプラグインです。",
